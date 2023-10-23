@@ -70,7 +70,10 @@
     const container = document.querySelector('.content');
     // inside an iframe
     if (window.self !== window.top) {
-      setupViewerForImJoy(container)
+      const viewer = itkVtkViewer.processURLParameters(container)
+      if (!viewer) {
+        itkVtkViewer.createViewerFromLocalFiles(container)
+      }
     } else {
       const viewer = itkVtkViewer.processURLParameters(container, {
         fullscreen: true
